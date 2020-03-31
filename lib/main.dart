@@ -1,5 +1,6 @@
-import 'package:expense_manager/transaction.dart';
+import './Widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
+import './Widgets/transaction_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,35 +8,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Expense Manager Flutter',
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transactoin> transactions = [
-    Transactoin(id: 01, title: 'Dahi', amount: 69.69, date: DateTime.now()),
-    Transactoin(id: 02, title: 'Pyaz', amount: 40, date: DateTime.now()),
-  ];
+  // String amountText;
+  // String titleText;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: Text('Expense Manager'),
       ),
-      body: Column(children: <Widget>[
-        Card(
-          child: Text(
-            'Widget Playground!',
-            style: TextStyle(fontSize: 50),
+      body: Column(
+        children: <Widget>[
+NewTransaction(),
+          Center( child:   TransactionList(), 
           ),
-        ),
-        Card(
-          child: Text('Henlo G'),
-        )
-      ]),
+        ],
+      ),
     );
   }
 }
