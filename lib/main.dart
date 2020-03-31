@@ -1,7 +1,5 @@
-import 'package:expense_manager/Widgets/user_transaction.dart';
+import 'package:expense_manager/Widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
-import './Widgets/new_transaction.dart';
-import './Widgets/transaction_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,10 +20,10 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Expense Manager'),
       ),
-      body: Column(
-        children: <Widget>[
-UserTransaction()
-        ],
+      body: SingleChildScrollView(
+              child: Column(
+          children: <Widget>[UserTransactions()],
+        ),
       ),
     );
   }

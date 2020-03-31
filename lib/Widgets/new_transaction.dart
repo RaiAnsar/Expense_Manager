@@ -12,35 +12,39 @@ class NewTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Card(
-            child: TextField(
-              style: TextStyle(fontSize: 18),
-              decoration: InputDecoration(labelText: "Title"),
+      child: Card(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        elevation: 7,
+              child: Column(
+
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            TextField(
+            
+              style: TextStyle(fontSize: 15,),
+              decoration: InputDecoration(labelText: " Title"),
               controller: titleController,
+              keyboardType: TextInputType.text, //TODO: redudandant
               // onChanged: (tValue) => titleText = tValue,
             ),
-          ),
-          Card(
-            child: TextField(
-              style: TextStyle(fontSize: 25),
-              decoration: InputDecoration(labelText: "Amount"),
+            TextField(
+              style: TextStyle(fontSize: 15),
+              decoration: InputDecoration(labelText: " Amount"),
               controller: amountController,
+              keyboardType: TextInputType.number,
               // onChanged: (aValue) => amountText = aValue,
             ),
-          ),
-          FlatButton(
-            onPressed: () {
-              addTransaction();
-              print(titleController.text);
-              print(amountController.text);
-            },
-            child: Text('Save Transaction'),
-            textColor: Colors.indigo,
-          )
-        ],
+            FlatButton(
+              onPressed: () {
+                addTransaction(titleController.text, double.parse(amountController.text));
+                print(titleController.text);
+                print(amountController.text);
+              },
+              child: Text('Save Transaction'),
+              textColor: Colors.indigo,
+            )
+          ],
+        ),
       ),
     );
   }

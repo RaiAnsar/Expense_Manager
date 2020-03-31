@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'new_transaction.dart';
 
-class UserTransaction extends StatefulWidget {
+class UserTransactions extends StatefulWidget {
   @override
-  _UserTransactionState createState() => _UserTransactionState();
+  _UserTransactionsState createState() => _UserTransactionsState();
 }
 
-class _UserTransactionState extends State<UserTransaction> {
+class _UserTransactionsState extends State<UserTransactions> {
   final List<Transactoin> _userTransactions = [
     Transactoin(id: '01', title: 'Dahi', amount: 69.69, date: DateTime.now()),
     Transactoin(id: '02', title: 'Pyaz', amount: 40.44, date: DateTime.now()),
