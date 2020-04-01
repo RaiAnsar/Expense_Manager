@@ -54,6 +54,7 @@ _startNewTransaction(BuildContext ctx) {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
