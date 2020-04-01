@@ -9,7 +9,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height:MediaQuery.of(context).size.height,
         child: ListView.builder(
           itemBuilder: (context, index) {
 
@@ -19,7 +19,7 @@ class TransactionList extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     child: Text(
-                      '\$${_userTransactions[index].amount}',
+                      '\$${_userTransactions[index].amount.toStringAsFixed(2)}', //Imp
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
