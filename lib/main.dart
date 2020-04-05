@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import './widgets/new_transaction.dart';
-import 'widgets/transaction_list.dart';
-import 'models/transaction.dart';
+import './widgets/transaction_list.dart';
+import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,68 +10,116 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Expense Manager Flutter',
+      title: 'Personal Expenses',
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+          appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+          )),
       home: MyHomePage(),
-      theme: ThemeData(primarySwatch: Colors.red, accentColor: Colors.teal, appBarTheme: AppBarTheme(color: Colors.lime)),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  // String titleInput;
+  // String amountInput;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transactoin> _userTransactions = [
-    Transactoin(id: '01', title: 'Dahi', amount: 69.69, date: DateTime.now()),
-    Transactoin(id: '02', title: 'Pyaz', amount: 40.44, date: DateTime.now()),
+  final List<Transaction> _userTransactions = [
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 69.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
   ];
 
-  void _addTransaction(String tranTitle, double tranAmount) {
-    final newTransaction = Transactoin(
-        title: tranTitle,
-        amount: tranAmount,
-        date: DateTime.now(),
-        id: DateTime.now().toString());
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+      title: txTitle,
+      amount: txAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
 
     setState(() {
-      _userTransactions.add(newTransaction);
+      _userTransactions.add(newTx);
     });
   }
 
-_startNewTransaction(BuildContext ctx) {
-  showModalBottomSheet(
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return NewTransaction(_addTransaction);
-      });
-}
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        title: Text(
+          'Personal Expenses',
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => _startNewTransaction(context),
-          )
+            onPressed: () => _startAddNewTransaction(context),
+          ),
         ],
-        title: Text('Expense Manager'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blue,
+                child: Text('CHART!'),
+                elevation: 5,
+              ),
+            ),
+            TransactionList(_userTransactions),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _startNewTransaction(context), //_startNewTransaction(context),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[        //NewTransaction(_addTransaction),
-        TransactionList(_userTransactions),
-        ],
-        ),
+        onPressed: () => _startAddNewTransaction(context),
       ),
     );
   }

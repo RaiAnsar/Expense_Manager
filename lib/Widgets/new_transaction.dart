@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NewTransaction extends StatefulWidget {
-  final Function addTransaction;
+  final Function addTx;
 
-  NewTransaction(this.addTransaction);
-
-  
+  NewTransaction(this.addTx);
 
   @override
   _NewTransactionState createState() => _NewTransactionState();
@@ -16,59 +14,51 @@ class _NewTransactionState extends State<NewTransaction> {
 
   final amountController = TextEditingController();
 
-  triggerTransaction() {
-    final titleData = titleController.text;
-    final amountData = double.parse(amountController.text);
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
 
-    if (titleData == null || amountData <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-Navigator.of(context).pop(); //navigator to pop the top most screen/ here modal bottom sheet
-    widget.addTransaction(titleData, amountData);
+
+    widget.addTx(
+      enteredTitle,
+      enteredAmount,
+    );
+
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        elevation: 7,
+    return Card(
+      elevation: 5,
+      child: Container(
+        padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             TextField(
-              style: TextStyle(
-                fontSize: 15,
-              ),
-              decoration: InputDecoration(labelText: " Title"),
+              decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              keyboardType: TextInputType.text, //TODO: redudandant
-              onSubmitted: (_) {
-                triggerTransaction();
-              },
-              // onChanged: (tValue) => titleText = tValue,
+              onSubmitted: (_) => submitData(),
+              // onChanged: (val) {
+              //   titleInput = val;
+              // },
             ),
             TextField(
-              style: TextStyle(fontSize: 15),
-              decoration: InputDecoration(labelText: " Amount"),
+              decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) {
-                triggerTransaction();
-              },
-              // onChanged: (aValue) => amountText = aValue,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
+              // onChanged: (val) => amountInput = val,
             ),
             FlatButton(
-              onPressed: () {
-                triggerTransaction();
-                print(titleController.text);
-                print(amountController.text);
-              },
-              child: Text('Save Transaction'),
-              textColor: Colors.indigo,
-            )
+              child: Text('Add Transaction'),
+              textColor: Colors.purple,
+              onPressed: submitData,
+            ),
           ],
         ),
       ),
