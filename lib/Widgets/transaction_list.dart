@@ -23,11 +23,11 @@ class TransactionList extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Colors.deepPurple),
+                          color: Theme.of(context).primaryColorDark),
                     ),
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.purple, width: 3),
+                      border: Border.all(color: Theme.of(context).primaryColorLight, width: 3),
                     ),
                     padding: EdgeInsets.all(10),
                   ),
@@ -37,7 +37,7 @@ class TransactionList extends StatelessWidget {
                       Text(
                         _userTransactions[index].title,
                         style: TextStyle(
-                            color: Colors.indigo,
+                            color: Theme.of(context).accentColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.underline),

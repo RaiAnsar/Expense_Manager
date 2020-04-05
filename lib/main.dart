@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Manager Flutter',
       home: MyHomePage(),
+      theme: ThemeData(primarySwatch: Colors.red, accentColor: Colors.teal, appBarTheme: AppBarTheme(color: Colors.lime)),
     );
   }
 }
@@ -21,7 +22,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final List<Transactoin> _userTransactions = [
     Transactoin(id: '01', title: 'Dahi', amount: 69.69, date: DateTime.now()),
     Transactoin(id: '02', title: 'Pyaz', amount: 40.44, date: DateTime.now()),
@@ -38,9 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _userTransactions.add(newTransaction);
     });
   }
-  
 
-  
 _startNewTransaction(BuildContext ctx) {
   showModalBottomSheet(
       context: ctx,
@@ -48,7 +46,6 @@ _startNewTransaction(BuildContext ctx) {
         return NewTransaction(_addTransaction);
       });
 }
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +62,7 @@ _startNewTransaction(BuildContext ctx) {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.adb),
+        child: Icon(Icons.add),
         onPressed: () => _startNewTransaction(context), //_startNewTransaction(context),
       ),
       body: SingleChildScrollView(

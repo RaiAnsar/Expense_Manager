@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTransaction;
 
   NewTransaction(this.addTransaction);
 
+  
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
+
   final amountController = TextEditingController();
 
   triggerTransaction() {
@@ -15,12 +23,13 @@ class NewTransaction extends StatelessWidget {
     if (titleData == null || amountData <= 0) {
       return;
     }
-
-    addTransaction(titleData, amountData);
+Navigator.of(context).pop(); //navigator to pop the top most screen/ here modal bottom sheet
+    widget.addTransaction(titleData, amountData);
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
